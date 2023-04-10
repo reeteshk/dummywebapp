@@ -27,6 +27,19 @@ variable "DATABASE_NAME" {
   type      = string
   default   = ""
 }
+variable "DEMO_AMI"{
+  type = string
+  default = ""
+}
+variable "DEV_AMI"{
+  type = string
+  default = ""
+}
+
+variable "SOURCE_AMI"{
+  type = string
+  default = ""
+}
 
 
 locals {
@@ -38,10 +51,8 @@ source "amazon-ebs" "my-ami" {
     ami_description = "AMI for CSYE 6225"
 
 //  
-  source_ami = "ami-005f9685cb30f234b"
-  ami_users = [
-    "793231301303","204539555313"
-  ]
+  source_ami = ${var.SOURCE_AMI}
+  ami_users = [${var.DEMO_AMI},${var.DEV_AMI}]
   ami_regions = [
     "us-east-1",
   ]
@@ -81,4 +92,12 @@ build {
   script = "./app.sh"
   
 }
+
+post-processor "manifest" {
+      output = "manifest.json"
+      strip_path = true
+      custom_data = {
+        my_custom_data = "example"
+      }
+  }
 }  
