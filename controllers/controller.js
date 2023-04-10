@@ -259,4 +259,9 @@ exports.health = async function (req, res) {
     return res.status(200).json("server is healthy ");
 }
 
+exports.health123 = async function (req, res) {
+    sdc.increment('healthz');
+    logger.info("server is healthy");
+    return res.status(200).json("server is healthy ");
+}
 
