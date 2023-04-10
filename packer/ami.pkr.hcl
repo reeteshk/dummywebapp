@@ -52,7 +52,7 @@ source "amazon-ebs" "my-ami" {
 
 //  
   source_ami = "ami-005f9685cb30f234b"
-  ami_users = [793231301303,204539555313]
+  ami_users = ["793231301303","204539555313"]
   ami_regions = [
     "us-east-1",
   ]
